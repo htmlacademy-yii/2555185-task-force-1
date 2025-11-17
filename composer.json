@@ -1,0 +1,18 @@
+{
+    "name": "aleksandra/2555185-task-force-1",
+    "description": "TaskForce is an online platform that serves as a job board for small tasks and services. Individuals can post projects they need help with, and service providers can browse these listings and submit offers with their proposed price",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+          "HtmlAcademy\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alexmasya97",
+            "email": "sasa_97@mail.ru"
+        }
+    ],
+    "require": {}
+}
