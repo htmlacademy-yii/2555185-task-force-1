@@ -9,6 +9,7 @@ use HtmlAcademy\Actions\CancelAction;
 use HtmlAcademy\Actions\CompleteAction;
 use HtmlAcademy\Actions\RefuseAction;
 use HtmlAcademy\Enums\TaskStatus;
+use HtmlAcademy\Exception\TaskException;
 
 class Task
 {
@@ -18,6 +19,15 @@ class Task
 
     public function __construct(int $customerId, ?int $executorId = null)
     {
+
+        if ($executorId !== null && $executorId <= 0) {
+            throw new TaskException("ID исполнителя должен быть положительным числом или null");
+        }
+
+        if ($executorId === $customerId) {
+            throw new TaskException("Заказчик и исполнитель не могут быть одним пользователем");
+        }
+
         $this->currentStatus = TaskStatus::NEW;
         $this->customerId = $customerId;
         $this->executorId = $executorId;
@@ -60,11 +70,42 @@ class Task
 
     public function setStatus(TaskStatus $status): void
     {
+        $availableActions = match ($this->currentStatus) {
+            TaskStatus::NEW => [new RespondAction(), new CancelAction()],
+            TaskStatus::IN_PROGRESS => [new CompleteAction(), new RefuseAction()],
+            TaskStatus::COMPLETED, TaskStatus::CANCELED, TaskStatus::FAILED => [],
+        };
+
+        $isValidTransition = false;
+        foreach ($availableActions as $action) {
+            if ($action->getNextStatus() === $status) {
+                $isValidTransition = true;
+                break;
+            }
+        }
+
+        if (!$isValidTransition && $this->currentStatus === $status) {
+            $isValidTransition = true;
+        }
+
+        if (!$isValidTransition) {
+            throw new TaskException(
+                "Недопустимый переход статуса с {$this->currentStatus->name} на {$status->name}"
+            );
+        }
+
         $this->currentStatus = $status;
     }
-
     public function setExecutorId(int $executorId): void
     {
+
+        if ($executorId === $this->customerId) {
+            throw new TaskException("Исполнитель не может быть заказчиком");
+        }
+
+        if ($this->executorId !== null && $this->executorId !== $executorId) {
+            throw new TaskException("Исполнитель уже назначен и не может быть изменен");
+        }
         $this->executorId = $executorId;
     }
 
