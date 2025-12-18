@@ -7,7 +7,7 @@ $this->title = 'index.php';
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent mt-5 mb-5">
-        <h1 class="display-4">Hello World!</h1>
+        <h1 class="display-4">Hello world!</h1>
 
     </div>
 
