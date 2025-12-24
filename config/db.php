@@ -2,10 +2,10 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=tf_db;dbname=database',
-    'username' => 'user',
-    'password' => 'password',
-    'charset' => 'utf8',
+    'dsn' => 'mysql:host=tf_db;dbname=taskForce',
+    'username' => 'root',
+    'password' => 'root',
+    'charset' => 'utf8mb4',
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
