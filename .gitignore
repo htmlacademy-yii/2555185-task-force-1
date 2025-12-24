@@ -33,3 +33,6 @@ tests/_support/_generated
 /.vagrant
 .docker/log/access.log
 .docker/log/error.log
+
+
+/config/db.php
