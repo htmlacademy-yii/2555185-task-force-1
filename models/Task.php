@@ -30,7 +30,11 @@ use Yii;
 class Task extends \yii\db\ActiveRecord
 {
 
-
+    const NEW = 'new';
+    const CANCELED = 'canceled';
+    const IN_PROGRESS = 'in_progress';
+    const COMPLETED = 'completed';
+    const FAILED = 'failed';
     /**
      * {@inheritdoc}
      */
