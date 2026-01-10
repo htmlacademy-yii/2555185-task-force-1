@@ -31,7 +31,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <body class="d-flex flex-column h-100">
 <header class="page-header">
     <nav class="main-nav">
-        <a href='#' class="header-logo">
+        <a href='/' class="header-logo">
             <img class="logo-image" src="img/logotype.png" width=227 height=60 alt="taskforce">
         </a>
         <div class="nav-wrapper">
