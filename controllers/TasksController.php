@@ -52,4 +52,35 @@ class TasksController extends Controller
             'filterForm' => $filterForm,
         ]);
     }
+
+    public function actionView($id)
+    {
+        // Получаем модель задания по ID
+        $task = Task::findOne($id);
+
+        // Если задание не найдено - 404
+        if (!$task) {
+            throw new \yii\web\NotFoundHttpException('Задание не найдено');
+        }
+
+        return $this->render('view', [
+            'task' => $task,
+        ]);
+    }
+
+
+    public function actionExecutor($id)
+    {
+        // Получаем модель исполнителя по ID
+        $executor = User::findOne($id);
+
+        // Если исполнитель не найден - 404
+        if (!$executor) {
+            throw new \yii\web\NotFoundHttpException('Исполнитель не найден');
+        }
+
+        return $this->render('executor', [
+            'executor' => $executor,
+        ]);
+    }
 }

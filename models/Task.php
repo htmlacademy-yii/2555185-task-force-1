@@ -152,4 +152,22 @@ class Task extends \yii\db\ActiveRecord
         return $this->hasOne(Review::className(), ['task_id' => 'task_id']);
     }
 
+    /**
+     * Получить текстовое название статуса
+     * @return string
+     */
+    public function getStatusLabel()
+    {
+        $labels = [
+            self::NEW => 'Новое',
+            self::CANCELED => 'Отменено',
+            self::IN_PROGRESS => 'В работе',
+            self::COMPLETED => 'Выполнено',
+            self::FAILED => 'Провалено',
+        ];
+
+        return $labels[$this->status] ?? ucfirst($this->status) ?? 'Новое';
+    }
+
+
 }

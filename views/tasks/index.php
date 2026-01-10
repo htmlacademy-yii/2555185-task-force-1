@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 ?>
 
 <main class="main-content container">
@@ -18,7 +19,7 @@ use yii\widgets\ActiveForm;
             <?php foreach ($tasks as $task): ?>
                 <div class="task-card">
                     <div class="header-task">
-                        <a href="#" class="link link--block link--big">
+                        <a href="<?= Url::to(['tasks/view', 'id' => $task->task_id]) ?>" class="link link--block link--big">
                             <?= Html::encode($task->title) ?>
                         </a>
                         <p class="price price--task">
